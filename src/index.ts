@@ -1,4 +1,5 @@
 import { firestore } from 'firebase'
+import isEmpty from 'lodash/isEmpty';
 import { getTimeStamp } from './_utils';
 
 interface IField {
@@ -69,7 +70,7 @@ export default class BaseFireStore {
     // @ts-ignore
     const defaultLogger = () => console.log(event && event.message, event);
     if (this.options && this.options.debug) {
-      return this.options.logger ? this.options.logger(event): defaultLogger();
+      return this.options.logger ? this.options.logger(event) : defaultLogger();
     }
     return defaultLogger();
   }
@@ -175,16 +176,19 @@ export default class BaseFireStore {
           });
         });
 
+      if (isEmpty(data)) {
+        throw new Error('Data not found');
+      }
+
+
       if (multiple) {
         return data;
       } else {
-        return data[0] ? data[0] : null;
+        // Return one item only
+        return data[0];
       }
     } catch (error) {
-      this.logger({
-        message: 'Error finding documents',
-        ...error
-      });
+      this.logger(error);
       return Promise.reject(error);
     }
   }

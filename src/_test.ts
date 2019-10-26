@@ -12,7 +12,7 @@ const sampleData = {
 
 const queryFields = [
   { name: 'unique', operator: '==', value: sampleData.unique },
-  { name: 'name', operator: '==', value: sampleData.customField }
+  { name: 'name', operator: '==', value: sampleData.name }
 ];
 
 /**
@@ -34,9 +34,9 @@ class TestCollection extends BaseFireStore {
 
 let currentId = ""; // to be used for other tests, like delete, and  edit
 
-describe('BaseFireStore client', () => {
+describe('Given a BaseFireStore client with `test` collection', () => {
 
-  it('Save sample data', async () => {
+  it('should create and save document', async () => {
     const testdb = new TestCollection();
     const sampleSet = await testdb.add(sampleData);
     currentId = sampleSet && sampleSet.id; // set current Id
@@ -46,7 +46,7 @@ describe('BaseFireStore client', () => {
     expect(sampleSet.id).to.be.string;
   });
 
-  it(`Get sample by Id`, async () => {
+  it(`should get document by Id`, async () => {
     const testdb = new TestCollection();
     const sampleSet: { name?: string, unique?: string, id?: any } = await testdb.byId(currentId);
     const Id = sampleSet && sampleSet.id;
@@ -56,7 +56,7 @@ describe('BaseFireStore client', () => {
     expect(sampleSet.id).to.be.string;
   });
 
-  it(`Get sample by 2 conditions whereAll`, async () => {
+  it(`should get document by 2 conditions with whereAll`, async () => {
     const testdb = new TestCollection();
     const sampleSet: { name?: string, unique?: string, id?: any } = await testdb.whereAll({
       fields: queryFields,
@@ -69,7 +69,25 @@ describe('BaseFireStore client', () => {
     expect(id).to.be.equal(currentId);
   });
 
-  it(`Delete sample by Id`, async () => {
+  it(`should get document with whereAll and update it`, async () => {
+    const testdb = new TestCollection();
+    const sampleSet: { name?: string, unique?: string, id?: any } = await testdb.whereAll({
+      fields: queryFields,
+      multiple: false
+    });
+    // tslint:disable-next-line: no-console
+    const id = sampleSet && sampleSet.id;
+
+    const updateDocument = await testdb.update({
+      id,
+      field: 'name',
+      value: 'value'
+    });
+
+    expect(updateDocument.id).to.be.equal(currentId);
+  });
+
+  it(`should delete document by Id`, async () => {
     const testdb = new TestCollection();
     const sampleSet: { name?: string, unique?: string, id?: any } = await testdb.delete(currentId);
     const Id = sampleSet && sampleSet.id;
