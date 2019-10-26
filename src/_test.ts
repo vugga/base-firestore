@@ -18,18 +18,22 @@ const queryFields = [
 /**
  * Test collection that extends from the base firestore
  */
-// @ts-ignore
 class BaseCollection extends BaseFireStore {
   constructor() {
-    super(
-      db,
+    super(db,
       {
         debug: true
-      }
-    );
+      });
+  }
+}
+
+class TestCollection extends BaseCollection {
+  constructor() {
+    super();
     this.collection = 'test';
   }
 }
+
 
 
 let currentId = ""; // to be used for other tests, like delete, and  edit
@@ -37,7 +41,7 @@ let currentId = ""; // to be used for other tests, like delete, and  edit
 describe('Given a BaseFireStore client with `test` collection', () => {
 
   it('should create and save document', async () => {
-    const testdb = new BaseCollection();
+    const testdb = new TestCollection();
     const sampleSet = await testdb.add(sampleData);
     currentId = sampleSet && sampleSet.id; // set current Id
     // tslint:disable-next-line: no-console
@@ -47,7 +51,7 @@ describe('Given a BaseFireStore client with `test` collection', () => {
   });
 
   it(`should get document by Id`, async () => {
-    const testdb = new BaseCollection();
+    const testdb = new TestCollection();
     const sampleSet: { name?: string, unique?: string, id?: any } = await testdb.byId(currentId);
     const Id = sampleSet && sampleSet.id;
     // tslint:disable-next-line: no-console
@@ -57,7 +61,7 @@ describe('Given a BaseFireStore client with `test` collection', () => {
   });
 
   it(`should get document by 2 conditions with whereAll`, async () => {
-    const testdb = new BaseCollection();
+    const testdb = new TestCollection();
     const sampleSet: { name?: string, unique?: string, id?: any } = await testdb.whereAll({
       fields: queryFields,
       multiple: false
@@ -70,7 +74,7 @@ describe('Given a BaseFireStore client with `test` collection', () => {
   });
 
   it(`should get document with whereAll and update it`, async () => {
-    const testdb = new BaseCollection();
+    const testdb = new TestCollection();
     const sampleSet: { name?: string, unique?: string, id?: any } = await testdb.whereAll({
       fields: queryFields,
       multiple: false
@@ -88,7 +92,7 @@ describe('Given a BaseFireStore client with `test` collection', () => {
   });
 
   it(`should delete document by Id`, async () => {
-    const testdb = new BaseCollection();
+    const testdb = new TestCollection();
     const sampleSet: { name?: string, unique?: string, id?: any } = await testdb.delete(currentId);
     const Id = sampleSet && sampleSet.id;
     // tslint:disable-next-line: no-console
