@@ -13,7 +13,7 @@ script:
   - npm run build
   - npm rm tslint
   - npm install $TYPESCRIPT --force
-  - npm run test-cov
+  - npm run test
 
 env:
   - NODE=6 TYPESCRIPT=typescript@latest
