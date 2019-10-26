@@ -1,0 +1,7 @@
+node_modules/
+coverage/
+.DS_Store
+firebase.config.js*
+.env*
+npm-debug.log
+dist/
