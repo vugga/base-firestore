@@ -31,6 +31,7 @@ interface IWhereAll {
   fields: IField[],
   multiple?: boolean;
   limit?: number;
+  snapshot?: boolean;
 }
 
 interface IDocument {
@@ -157,7 +158,7 @@ export default class BaseFireStore {
    */
   async whereAll(query: IWhereAll): Promise<firestore.DocumentData | any | any[]> {
 
-    const { fields, multiple = false, limit = 1000 } = query;
+    const { fields, multiple = false, limit = 1000, snapshot = false } = query;
 
     const data: any = [];
     try {
@@ -171,9 +172,16 @@ export default class BaseFireStore {
 
       await findQuery.limit(Number(limit)).get()
         .then((snapshot: any) => {
+          
+          if(snapshot){
+            return snapshot;
+          }
+          
+          // do parse data
           snapshot.docs.map((doc: any) => {
             data.push({ ...doc.data(), id: doc.id });
           });
+
         });
 
       if (isEmpty(data)) {
