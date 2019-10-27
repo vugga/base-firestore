@@ -171,14 +171,14 @@ export default class BaseFireStore {
       });
 
       await findQuery.limit(Number(limit)).get()
-        .then((snapshot: any) => {
-          
+        .then((snapshotData: any) => {
+
           if(snapshot){
-            return snapshot;
+            return snapshotData.docs;
           }
           
           // do parse data
-          snapshot.docs.map((doc: any) => {
+          snapshotData.docs.map((doc: any) => {
             data.push({ ...doc.data(), id: doc.id });
           });
 
