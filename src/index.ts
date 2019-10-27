@@ -174,7 +174,7 @@ export default class BaseFireStore {
         .then((snapshotData: any) => {
 
           if(snapshot){
-            return snapshotData.docs;
+            return snapshotData;
           }
           
           // do parse data
