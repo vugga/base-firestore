@@ -73,7 +73,7 @@ export default class BaseFireStore {
     if (this.options && this.options.debug) {
       return this.options.logger ? this.options.logger(event) : defaultLogger();
     }
-    return defaultLogger();
+    return null;
   }
 
 
@@ -173,10 +173,10 @@ export default class BaseFireStore {
       await findQuery.limit(Number(limit)).get()
         .then((snapshotData: any) => {
 
-          if(snapshot){
+          if (snapshot) {
             return snapshotData;
           }
-          
+
           // do parse data
           snapshotData.docs.map((doc: any) => {
             data.push({ ...doc.data(), id: doc.id });
