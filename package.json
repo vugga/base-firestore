@@ -1,8 +1,8 @@
 {
   "name": "@vuga/base-firestore",
   "private": false,
-  "version": "0.0.3",
-  "description": "Universal Firebase Firestore CRUD library, works on both clients and servers",
+  "version": "0.0.4",
+  "description": "Firebase Firestore CRUD/Query/Pagination library for Node",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
