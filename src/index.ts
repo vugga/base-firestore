@@ -1,6 +1,12 @@
-import { firestore } from 'firebase'
+import * as admin from 'firebase-admin'
 import isEmpty from 'lodash/isEmpty';
 import { getTimeStamp } from './_utils';
+
+namespace firestore { 
+  export interface Firestore extends admin.firestore.Firestore {}
+  export interface CollectionReference extends admin.firestore.CollectionReference {}
+  export interface DocumentData extends admin.firestore.DocumentData {}
+};
 
 interface IField {
   name: string;
