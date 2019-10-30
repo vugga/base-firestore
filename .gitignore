@@ -6,3 +6,4 @@ firebase.config.js*
 npm-debug.log*
 yarn-error.log*
 dist/
+secret.json*
