@@ -122,7 +122,7 @@ export default class BaseFireStore {
       return { data: nextData, total: totalPosts };
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -154,7 +154,7 @@ export default class BaseFireStore {
       }
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -203,7 +203,7 @@ export default class BaseFireStore {
       }
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -228,7 +228,7 @@ export default class BaseFireStore {
       return data;
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -246,7 +246,7 @@ export default class BaseFireStore {
         });
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -264,7 +264,7 @@ export default class BaseFireStore {
         });
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -280,7 +280,7 @@ export default class BaseFireStore {
     }
     catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -317,7 +317,7 @@ export default class BaseFireStore {
 
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -336,7 +336,7 @@ export default class BaseFireStore {
       return post;
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -358,7 +358,7 @@ export default class BaseFireStore {
       return post;
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 }

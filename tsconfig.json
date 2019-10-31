@@ -12,7 +12,8 @@
     "sourceMap": true,
     "inlineSources": true,
     "esModuleInterop": true,
-    "types": ["node", "mocha"]
+    "types": ["node", "mocha"],
+    "strictNullChecks": false
   },
   "include": [
     "src/**/*"
