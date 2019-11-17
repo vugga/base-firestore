@@ -1,8 +1,8 @@
 {
   "name": "@vuga/base-firestore",
   "private": false,
-  "version": "0.0.3",
-  "description": "Universal Firebase Firestore CRUD library, works on both clients and servers",
+  "version": "0.0.6",
+  "description": "Firebase Firestore CRUD/Query/Pagination library for Node",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -13,10 +13,9 @@
   "scripts": {
     "lint": "tslint \"src/**/*.ts\" --project tsconfig.json",
     "build": "rimraf dist && tsc",
-    "test-spec": "mocha src/**/*test.ts -R spec --require ts-node/register --exit",
-    "test": "npm run test-spec",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm run build && npm test"
+    "test":  "mocha src/**/*test.ts -R spec --require ts-node/register --exit",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn build && yarn test"
   },
   "engines": {
     "node": ">=4.2.0"
@@ -59,7 +58,7 @@
     "typescript": ">=2.0"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
-    "firebase": "^6.6.0"
+    "firebase-admin": "^8.7.0",
+    "lodash": "^4.17.15"
   }
 }

@@ -1,6 +1,12 @@
-import { firestore } from 'firebase'
+import * as admin from 'firebase-admin'
 import isEmpty from 'lodash/isEmpty';
 import { getTimeStamp } from './_utils';
+
+namespace firestore {
+  export interface Firestore extends admin.firestore.Firestore { }
+  export interface CollectionReference extends admin.firestore.CollectionReference { }
+  export interface DocumentData extends admin.firestore.DocumentData { }
+};
 
 interface IField {
   name: string;
@@ -116,7 +122,7 @@ export default class BaseFireStore {
       return { data: nextData, total: totalPosts };
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -148,7 +154,7 @@ export default class BaseFireStore {
       }
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -197,7 +203,7 @@ export default class BaseFireStore {
       }
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -222,7 +228,7 @@ export default class BaseFireStore {
       return data;
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -236,11 +242,14 @@ export default class BaseFireStore {
         .doc(id)
         .get()
         .then((item: any) => {
+          if (!item.data()) {
+            throw new Error(`Couldn't find item by id ${id}`);
+          }
           return { ...item.data(), id };
         });
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -258,7 +267,7 @@ export default class BaseFireStore {
         });
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -274,7 +283,7 @@ export default class BaseFireStore {
     }
     catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -311,7 +320,7 @@ export default class BaseFireStore {
 
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -330,7 +339,7 @@ export default class BaseFireStore {
       return post;
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 
@@ -352,7 +361,7 @@ export default class BaseFireStore {
       return post;
     } catch (error) {
       this.logger(error);
-      return Promise.reject(error);
+      return null
     }
   }
 }
