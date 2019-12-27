@@ -1,6 +1,7 @@
 import { firestore } from 'firebase'
 import isEmpty from 'lodash/isEmpty';
 import { getTimeStamp } from './_utils';
+import { AutoPagination, PaginationData } from './interface';
 
 interface IField {
   name: string;
@@ -78,11 +79,69 @@ export default class BaseFireStore {
 
 
   /**
-   * Return the collection name
-   * @param {String} collection
+   * Return the collection
    */
-  getRef(collection: string): firestore.CollectionReference {
-    return this.db.collection(collection);
+  getRef(): firestore.CollectionReference {
+    return this.db.collection(this.collection);
+  }
+
+  /**
+  * @param  {String} path
+  * @return {arrayObject} deployedApps by user
+  */
+  async autoPagination(query: AutoPagination): Promise<PaginationData> {
+
+    const limit = query.limit ? query.limit : 10;
+    const page = query.page ? query.page : 1;
+    const fields = query.whereAll;
+
+    try {
+
+      let data: any = this.getRef(this.collection);
+
+      // Add all fields conditions, 
+      fields.forEach(field => {
+        data = data.where(field.name, field.operator, field.value)
+      });
+
+      data = await data.get().then((snapshot: { docs: string | any[]; }) => {
+        const docsAt = (page - 1) * limit;
+        const startAt = snapshot.docs[docsAt];
+        const total = snapshot.docs.length;
+        return { startAt, total };
+      });
+
+      const { startAt, total }: { total: number, startAt: any } = data;
+
+      // if null return
+      if (total <= 0) {
+        return { data: [], total: 0 };
+      }
+
+      let nextData: any = this.getRef(this.collection);
+
+      // Add all fields conditions, 
+      fields.forEach(field => {
+        nextData = nextData.where(field.name, field.operator, field.value)
+      });
+
+      nextData = await nextData
+        .limit(Number(limit))
+        .startAt(startAt)
+        .get().then((docSnapshot: { docs: any[]; }) => {
+          const docData = docSnapshot.docs.map(doc => {
+            return { ...doc.data(), id: doc.id };
+          });
+          return docData;
+        });
+
+      return { data: nextData, total };
+
+    } catch (error) {
+      console.log('Error', error);
+      return { data: [], total: 0 };
+    }
+
   }
 
   /**
