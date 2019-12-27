@@ -1,12 +1,12 @@
 import { firestore } from 'firebase-admin'
 import isEmpty from 'lodash/isEmpty';
 import { getTimeStamp } from './_utils';
-import { AutoPagination, PaginationData } from './interface';
+import { AutoPagination, PaginationData, Operators } from './interface';
 
 interface IField {
   name: string;
-  operator?: any;
-  value: string;
+  operator?: Operators;
+  value: any;
 }
 interface IQuery {
   // for pagination

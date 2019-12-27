@@ -1,5 +1,4 @@
 export type Operators = "<" | "<=" | '==' | ">" | ">=" | 'array-contains' | 'array-contains-any';
-export type BASE_STATUS = 'draft' | 'success' | 'fail' | 'schedule';
 export interface PaginationData {
   data: any[];
   total: number;
