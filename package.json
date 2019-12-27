@@ -1,8 +1,8 @@
 {
   "name": "@vuga/base-firestore",
   "private": false,
-  "version": "0.0.7",
-  "description": "Universal Firebase Firestore CRUD library, works on both clients and servers",
+  "version": "0.0.8",
+  "description": "NodeJS Firebase Firestore CRUD library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -59,7 +59,7 @@
     "typescript": ">=2.0"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
-    "firebase": "^6.6.0"
+    "firebase-admin": "^8.9.0",
+    "lodash": "^4.17.15"
   }
 }

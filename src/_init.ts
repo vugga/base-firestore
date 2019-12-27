@@ -1,8 +1,11 @@
-import * as firebase from 'firebase';
-import 'firebase/firestore';
+import * as admin from 'firebase-admin';
 import config from './config';
 
-firebase.initializeApp(config);
-const db = firebase.firestore();
+admin.initializeApp({
+    // @ts-ignore
+    credential: admin.credential.cert(config),
+    databaseURL: `https://${config.project_id}.firebaseio.com`,
+});
 
+const db = admin.firestore();
 export { db };

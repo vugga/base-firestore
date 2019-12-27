@@ -1,2 +1,2 @@
-import config from './firebase.config';
+import config from './service.account.json';
 export default config;
