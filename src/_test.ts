@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import 'mocha';
 import BaseFireStore from '.';
 import { db } from './_init'
+import { Where } from './interface';
 
 const sampleData = {
   name: 'name',
@@ -10,7 +11,7 @@ const sampleData = {
   customFieldX: 'customFieldX'
 };
 
-const queryFields = [
+const queryFields: Where[] = [
   { name: 'unique', operator: '==', value: sampleData.unique },
   { name: 'name', operator: '==', value: sampleData.name }
 ];
