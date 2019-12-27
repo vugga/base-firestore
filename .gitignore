@@ -2,6 +2,7 @@ node_modules/
 coverage/
 .DS_Store
 firebase.config.js*
+firebase.config.ts*
 .env*
 npm-debug.log*
 yarn-error.log*

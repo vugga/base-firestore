@@ -97,7 +97,7 @@ export default class BaseFireStore {
 
     try {
 
-      let data: any = this.getRef(this.collection);
+      let data: any = this.getRef();
 
       // Add all fields conditions, 
       fields.forEach(field => {
@@ -118,7 +118,7 @@ export default class BaseFireStore {
         return { data: [], total: 0 };
       }
 
-      let nextData: any = this.getRef(this.collection);
+      let nextData: any = this.getRef();
 
       // Add all fields conditions, 
       fields.forEach(field => {
@@ -152,7 +152,7 @@ export default class BaseFireStore {
     const limit = query.limit ? query.limit : 1000;
     const page = query.page ? query.page : 1;
     try {
-      const data = await this.getRef(this.collection)
+      const data = await this.getRef()
         .get()
         .then(async (snapshot: any) => {
           const docsAt = (page - 1) * limit;
@@ -161,7 +161,7 @@ export default class BaseFireStore {
           return { startAt, totalPosts };
         });
       const { startAt, totalPosts } = data;
-      const nextData = await this.getRef(this.collection)
+      const nextData = await this.getRef()
         // .orderBy('createdAt', 'desc')
         .limit(Number(limit))
         .startAt(startAt)
@@ -191,7 +191,7 @@ export default class BaseFireStore {
     const multiple = query.multiple ? query.multiple : false;
     const data: any = [];
     try {
-      await this.getRef(this.collection)
+      await this.getRef()
         .limit(Number(limit))
         .where(field, operator, value)
         .get()
@@ -222,7 +222,7 @@ export default class BaseFireStore {
     const data: any = [];
     try {
 
-      let findQuery: any = this.getRef(this.collection);
+      let findQuery: any = this.getRef();
 
       // Add all fields conditions, 
       fields.forEach(field => {
@@ -268,7 +268,7 @@ export default class BaseFireStore {
     const { field, min, max } = query;
     let posts: any[] = [];
     try {
-      const data = await this.getRef(this.collection)
+      const data = await this.getRef()
         .where(field, '>=', min)
         .where(field, '<=', max)
         .get()
@@ -291,7 +291,7 @@ export default class BaseFireStore {
  */
   async byId(id: string): Promise<firestore.DocumentData> {
     try {
-      return await this.getRef(this.collection)
+      return await this.getRef()
         .doc(id)
         .get()
         .then((item: any) => {
@@ -309,7 +309,7 @@ export default class BaseFireStore {
    */
   async delete(id: any = null): Promise<firestore.DocumentData> {
     try {
-      return this.getRef(this.collection)
+      return this.getRef()
         .doc(id)
         .delete() // Deleting a document does not delete its subcollections!
         .then(() => {
@@ -323,7 +323,7 @@ export default class BaseFireStore {
 
   async byName(name: string): Promise<firestore.DocumentData> {
     try {
-      return await this.getRef(this.collection)
+      return await this.getRef()
         .where('name', '==', name)
         .get()
         .then((snapshot: any) => {
@@ -362,7 +362,7 @@ export default class BaseFireStore {
       }
 
       // Default add document
-      return this.getRef(this.collection)
+      return this.getRef()
         .add(data)
         .then((doc: IDocument) => {
           return this.byId(doc.id);
@@ -380,7 +380,7 @@ export default class BaseFireStore {
     let data = query.data ? query.data : {};
     data = { ...data, updatedAt: getTimeStamp() };
     try {
-      const post = await this.getRef(this.collection)
+      const post = await this.getRef()
         .doc(id)
         .set(data, { merge: true })
         .then(() => {
@@ -402,7 +402,7 @@ export default class BaseFireStore {
     let data = query.data ? query.data : {};
     data = { ...data, updatedAt: getTimeStamp() };
     try {
-      const post = await this.getRef(this.collection)
+      const post = await this.getRef()
         .doc(id)
         .update(data)
         .then(() => {
