@@ -1,2 +1,2 @@
-import { config } from './firebase.config.js';
+import config from './firebase.config';
 export default config;

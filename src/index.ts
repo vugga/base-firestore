@@ -63,7 +63,7 @@ export default class BaseFireStore {
     }
   ) {
     this.db = db;
-    this.collection = '';
+    this.collection = 'test';
     this.storageRef = 'images';
     this.options = options; // debug flag
   }
