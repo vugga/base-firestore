@@ -2,6 +2,7 @@ import { firestore } from 'firebase-admin'
 import isEmpty from 'lodash/isEmpty';
 import { getTimeStamp } from './_utils';
 import { AutoPagination, PaginationData, Operators } from './interface';
+export * from './interface';
 
 interface IField {
   name: string;
