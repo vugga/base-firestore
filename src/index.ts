@@ -245,7 +245,7 @@ export default class BaseFireStore {
         });
 
       if (isEmpty(data)) {
-        throw new Error('Data not found');
+        return null
       }
 
 
