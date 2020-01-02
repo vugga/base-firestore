@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import 'mocha';
 import BaseFireStore from '.';
 import { db } from './_init'
-import { Where } from './interface';
+import { Where, OrderByDirection } from './interface';
 
 const sampleData = {
   name: 'name',
@@ -15,6 +15,10 @@ const queryFields: Where[] = [
   { name: 'unique', operator: '==', value: sampleData.unique },
   { name: 'name', operator: '==', value: sampleData.name }
 ];
+
+const sort: { direction: OrderByDirection, name: string; }[] = [{
+  name: "customField", direction: "asc"
+}]
 
 /**
  * Test collection that extends from the base firestore
@@ -64,6 +68,7 @@ describe('Given a BaseFireStore client with `test` collection', () => {
   it(`should get document by 2 conditions with whereAll`, async () => {
     const testdb = new TestCollection();
     const sampleSet: { name?: string, unique?: string, id?: any } = await testdb.whereAll({
+      sort,
       fields: queryFields,
       multiple: false
     });
