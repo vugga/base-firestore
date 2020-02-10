@@ -4,6 +4,8 @@ import { getTimeStamp } from './_utils';
 import { AutoPagination, PaginationData, Operators, OrderByDirection } from './interface';
 export * from './interface';
 
+export * from './_autos';
+
 interface IField {
   name: string;
   operator?: Operators;
