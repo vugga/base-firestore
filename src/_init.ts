@@ -8,4 +8,5 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-export { db };
+const realTimeDb = admin.database();
+export { db, realTimeDb };

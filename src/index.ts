@@ -3,7 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 import { getTimeStamp } from './_utils';
 import { AutoPagination, PaginationData, Operators, OrderByDirection } from './interface';
 export * from './interface';
-
+export * from './reatime.db';
 export * from './_autos';
 
 interface IField {
