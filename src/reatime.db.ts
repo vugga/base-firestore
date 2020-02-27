@@ -1,6 +1,4 @@
 import * as admin from 'firebase-admin';
-import './_init';
-
 const realTimeDb = admin.database();
 
 interface ReadQuery {

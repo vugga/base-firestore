@@ -1,4 +1,5 @@
-import 'mocha'
+import 'mocha';
+import './_init';
 import { expect } from 'chai'
 import chalk from 'chalk';
 import { RealTimeDb } from './reatime.db';
