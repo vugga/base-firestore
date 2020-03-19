@@ -430,5 +430,29 @@ export default class BaseFireStore {
       this.logger(error);
       return Promise.reject(error);
     }
+  },
+
+
+  /**
+   * timelinePagination
+   * Pagination using createdAt from newest time to older ->
+   * Alway DESC
+   * use start and order to pull chunk from a specific time range
+   */
+  async timelinePagination(args: { order: 'new' | 'old', limit: number, start: Date }) {
+    const db = this;
+    const { order, limit = 10 } = args;
+    const startAt = new Date(args.start || new Date());
+
+    return await db.whereAll({
+      fields: [
+        { name: 'createdAt', operator: order === 'new' ? '>' : '<', value: startAt }
+      ],
+      sort: [
+        { name: 'createdAt', direction: 'desc' }
+      ],
+      multiple: true,
+      limit,
+    });
   }
 }
