@@ -430,7 +430,7 @@ export default class BaseFireStore {
       this.logger(error);
       return Promise.reject(error);
     }
-  },
+  }
 
 
   /**
