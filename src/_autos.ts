@@ -5,6 +5,11 @@ export const addAutoQueries = (name: string, model: BaseFireStore) => {
 
     return {
 
+        // Add timeline pagination
+        [`${name}Timeline`]: async (_: any, { limit, order, start }: { limit: number, page?: number; order: any, start: Date }): Promise<any> => {
+            return model.timelinePagination({ limit, order, start });
+        },
+
         // Get all with pagination
         [`${name}s`]: async (_: any, { limit, page }: { limit: number, page?: number; }): Promise<any> => {
             return model.all({ limit, page });
