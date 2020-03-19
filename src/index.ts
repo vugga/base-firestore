@@ -439,7 +439,7 @@ export default class BaseFireStore {
    * Alway DESC
    * use start and order to pull chunk from a specific time range
    */
-  async timelinePagination(args: { order: 'new' | 'old', limit: number, start: Date }) {
+  async timelinePagination(args: { order: 'new' | 'old', limit: number, start: Date }): Promise<firestore.DocumentData[]> {
     const db = this;
     const { order, limit = 10 } = args;
     const startAt = new Date(args.start || new Date());
