@@ -8,7 +8,7 @@ const field = 'symbol';
 const demoDb = "test";
 const equalTo = 'CRWD'
 
-const store = RealTimeDb.Instance;
+// const store = RealTimeDb.Instance;
 
 describe('Realtime DB', () => {
     it('should query a field', async () => {

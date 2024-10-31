@@ -1,5 +1,4 @@
-import * as admin from 'firebase-admin';
-const realTimeDb = admin.database();
+import { database } from 'firebase-admin';
 
 interface ReadQuery {
     path: string,
@@ -9,22 +8,18 @@ interface ReadQuery {
 }
 export class RealTimeDb {
 
-    db: admin.database.Database;
+    db: database.Database;
 
     private static _instance: RealTimeDb;
 
-    public static get Instance() {
-        return this._instance || (this._instance = new this());
-    }
-
-    private constructor() {
-        this.db = realTimeDb;
+    private constructor(db: database.Database) {
+        this.db = db;
     }
 
     /**
      * getRef
      */
-    public getRef(path: string): admin.database.Reference {
+    public getRef(path: string): database.Reference {
         return this.db.ref(path);
     }
 

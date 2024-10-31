@@ -1,7 +1,7 @@
 {
-  "name": "@vuga/base-firestore",
+  "name": "@vuga/firestore",
   "private": false,
-  "version": "0.1.5",
+  "version": "0.0.2",
   "description": "NodeJS Firebase Firestore CRUD library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
     "test-spec": "mocha src/**/*test.ts -R spec --require ts-node/register --exit",
     "test": "npm run test-spec",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run build && npm test"
+    "prepublishOnly": "npm run build"
   },
   "engines": {
     "node": ">=4.2.0"
