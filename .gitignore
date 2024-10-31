@@ -4,6 +4,7 @@ coverage/
 firebase.config.js*
 firebase.config.ts*
 *.account.json*
+service.account.json
 .env*
 npm-debug.log*
 yarn-error.log*

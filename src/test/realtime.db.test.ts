@@ -2,7 +2,7 @@ import 'mocha';
 import './_init';
 import { expect } from 'chai'
 import chalk from 'chalk';
-import { RealTimeDb } from './reatime.db';
+import { RealTimeDb } from '../reatime.db';
 
 const field = 'symbol';
 const demoDb = "test";

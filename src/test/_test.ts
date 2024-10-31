@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import 'mocha';
 import './_init';
 import * as admin from 'firebase-admin';
-import BaseFireStore from '.';
-import { Where, OrderByDirection } from './interface';
+import BaseFireStore from '..';
+import { Where, OrderByDirection } from '../interface';
 
 const db = admin.firestore();
 
